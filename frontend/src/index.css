@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body { 
+    @apply bg-surface-50 dark:bg-surface-900 text-surface-900 dark:text-gray-200 font-sans antialiased overflow-x-hidden transition-colors duration-300; 
+  }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-surface-300 dark:bg-surface-700 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-primary-500; }
+}
+
+@layer components {
+  /* Minimal UI Elements */
+  .card { 
+    @apply bg-white dark:bg-surface-850 border border-surface-200 dark:border-white/5 rounded-2xl p-6 shadow-sm dark:shadow-md transition-all duration-300; 
+  }
+  
+  .btn-primary { 
+    @apply bg-primary-500 hover:bg-primary-400 text-white font-medium px-5 py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 border border-transparent hover:shadow-[0_4px_14px_rgba(6,182,212,0.3)] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed; 
+  }
+  
+  .btn-secondary { 
+    @apply bg-surface-100 hover:bg-surface-200 dark:bg-surface-800 dark:hover:bg-surface-700 text-surface-700 dark:text-gray-200 border border-surface-300 dark:border-white/10 font-medium px-5 py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 active:scale-[0.98]; 
+  }
+  
+  .input-field { 
+    @apply w-full bg-white dark:bg-surface-800/80 border border-surface-300 dark:border-surface-700 text-surface-900 dark:text-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-300; 
+  }
+  
+  .select-field {
+    @apply w-full bg-white dark:bg-surface-800/80 border border-surface-300 dark:border-surface-700 text-surface-900 dark:text-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-300 cursor-pointer appearance-none;
+  }
+  
+  .stat-card { @apply card flex flex-col gap-2 border-t border-t-surface-200 dark:border-t-white/10; }
+  
+  /* Badges */
+  .badge { @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider border shadow-sm uppercase; }
+  .badge-critical { @apply badge bg-danger-500/15 text-danger-600 dark:text-danger-400 border-danger-500/30 shadow-danger-500/10; }
+  .badge-high { @apply badge bg-warning-500/15 text-warning-600 dark:text-warning-400 border-warning-500/30; }
+  .badge-moderate { @apply badge bg-yellow-500/15 text-yellow-600 dark:text-yellow-500 border-yellow-500/30; }
+  .badge-low { @apply badge bg-success-500/15 text-success-600 dark:text-success-400 border-success-500/30; }
+  .badge-open { @apply badge bg-primary-500/15 text-primary-600 dark:text-primary-400 border-primary-500/30; }
+  .badge-resolved { @apply badge bg-success-500/15 text-success-600 dark:text-success-400 border-success-500/30; }
+
+  /* Nav items */
+  .nav-item { 
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-surface-600 dark:text-gray-400 hover:text-surface-900 dark:hover:text-white transition-all duration-300 cursor-pointer font-medium hover:bg-surface-200/50 dark:hover:bg-surface-800 border border-transparent; 
+  }
+  .nav-item-active { 
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-primary-700 dark:text-white bg-primary-50 dark:bg-surface-800 border border-primary-200 dark:border-primary-500/20 font-semibold relative overflow-hidden; 
+  }
+  .nav-item-active::before {
+    content: ''; @apply absolute left-0 top-0 bottom-0 w-1 bg-primary-500 rounded-l-xl;
+  }
+  
+  /* Tables */
+  .table-container {
+    @apply w-full overflow-x-auto bg-white dark:bg-surface-850 border border-surface-200 dark:border-white/5 rounded-2xl shadow-sm dark:shadow-md transition-colors duration-300;
+  }
+  .table {
+    @apply w-full text-left border-collapse whitespace-nowrap;
+  }
+  .table th {
+    @apply px-6 py-4 text-xs font-bold text-surface-500 dark:text-gray-400 uppercase tracking-widest border-b border-surface-200 dark:border-white/5 bg-surface-50 dark:bg-surface-800/50 transition-colors duration-300;
+  }
+  .table td {
+    @apply px-6 py-4 border-b border-surface-100 dark:border-white/5 text-surface-900 dark:text-gray-200 text-sm transition-colors duration-300;
+  }
+  .table tr:last-child td {
+    @apply border-b-0;
+  }
+  .table tbody tr:hover {
+    @apply bg-surface-50 dark:bg-white/5;
+  }
+}
+
+/* Custom SVG Animation Keyframes for Login Screen */
+@keyframes path-flow {
+  from { stroke-dashoffset: 24; }
+  to { stroke-dashoffset: 0; }
+}
+.animate-path-flow {
+  stroke-dasharray: 6 6;
+  animation: path-flow 1s linear infinite;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Map specific overrides */
+.leaflet-container { 
+  @apply bg-surface-100 dark:bg-[#090E17] !important; 
+  border-radius: 1rem; 
+  @apply border border-surface-300 dark:border-white/5;
+  font-family: 'Inter', sans-serif;
+}
+.leaflet-tile { 
+  transition: filter 0.5s ease; 
+}
+.dark .leaflet-tile { 
+  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(1.1) grayscale(0.2) !important; 
+}
+.leaflet-popup-content-wrapper { 
+  @apply bg-white/95 dark:bg-surface-850/90 backdrop-blur-xl border border-surface-300 dark:border-white/10 text-surface-900 dark:text-gray-200 rounded-xl shadow-glass !important; 
+}
+.leaflet-popup-tip { 
+  @apply bg-white dark:bg-[#111827] border border-surface-300 dark:border-white/10 !important; 
+}
+
+/* Recharts override */
+.recharts-tooltip-wrapper { @apply !rounded-xl !bg-white dark:!bg-surface-850 !border !border-surface-200 dark:!border-white/10 !shadow-sm dark:!shadow-glass; }
+.recharts-default-tooltip { @apply !bg-transparent !border-0; }
+.recharts-cartesian-grid-horizontal line, .recharts-cartesian-grid-vertical line { @apply stroke-surface-200 dark:stroke-white/5; }
